@@ -1,6 +1,6 @@
-import Entity from "../Entity.js";
+import {Entity} from "../Entity.js";
 
-export default class Munition extends Entity {
+class Munition extends Entity {
 
     constructor(scene, id, coordX, coordY, height, vx, vy) {
         super(scene, id, coordX, coordY, height, vx, vy);
@@ -27,6 +27,8 @@ export default class Munition extends Entity {
     move(listEntitys) {
         super.move();
 
+        if (this.outOfWorld ()) { return true; }
+
         for (let entity of listEntitys) {
             if (entity.id != this.id) {
                 if (entity.collision == 'circle') {
@@ -47,4 +49,8 @@ export default class Munition extends Entity {
         return false;
     }
 
+}
+
+export {
+    Munition
 }

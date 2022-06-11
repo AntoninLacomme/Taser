@@ -1,8 +1,8 @@
-import Spawner from "./Spawner.js";
-import DestructibleMunition from "../munition/DestructibleMunition.js";
-import UndestructibleMunition from "../munition/UndestructibleMunition.js";
+import {Spawner} from "./Spawner.js";
+import {DestructibleMunition} from "../munition/DestructibleMunition.js";
+import {UndestructibleMunition} from "../munition/UndestructibleMunition.js";
 
-export default class SpawnerTest extends Spawner {
+class SpawnerTest extends Spawner {
 
     constructor (scene, id, coordX, coordY, height) {
         super (scene, id, coordX, coordY, height, 0, 0);
@@ -58,4 +58,8 @@ export default class SpawnerTest extends Spawner {
         }
         return false;
     }
+}
+
+export {
+    SpawnerTest
 }

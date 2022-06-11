@@ -1,5 +1,6 @@
+import {World} from "../world/World.js";
 
-export default class Entity {
+class Entity {
 
     constructor (scene, id, coordX, coordY, height, vx=0, vy=0) {
         if (this.constructor == Entity.constructor) {
@@ -32,6 +33,13 @@ export default class Entity {
 
         this.shape.position.x = this.coordX;
         this.shape.position.z = this.coordY;
+
+        return this.outOfWorld ();
+    }
+
+    outOfWorld () {
+        return this.coordX < -(World.WIDTH >> 1) || this.coordX > (World.WIDTH >> 1) || 
+                this.coordY < -(World.HEIGHT >> 1) || this.coordY > (World.HEIGHT >> 1)
     }
 
     shoot () {
@@ -56,4 +64,8 @@ export default class Entity {
     checkCircleCollision(entity) {
         return (Math.sqrt((entity.coordX - this.coordX) ** 2 + (entity.coordY - this.coordY) ** 2) < this.cheight + entity.cheight);
     }
+}
+
+export {
+    Entity
 }

@@ -1,7 +1,9 @@
-import SpawnerTest from "../entity/spawner/SpawnerTest.js";
-import WallEntity from "../entity/WallEntity.js";
+import {Entity} from "../entity/Entity.js";
 
-export default class World {
+class World {
+
+    static WIDTH = 200;
+    static HEIGHT = 200;
 
     constructor(engine, world) {
         this.entitys = [];
@@ -51,29 +53,28 @@ export default class World {
         light4.intensity = 0.6;
         light5.intensity = 1;
 
-        const height = 20,
-            sheight = height * 0.6;
-        const WIDTH = this.world.length * height,
-            HEIGHT = this.world[0].length * height;
+        const height = 20, sheight = height * 0.6;
+        World.WIDTH = this.world.length * height;
+        World.HEIGHT = this.world[0].length * height;
 
         for (let i = 0; i < this.world.length; i++) {
             for (let j = 0; j < this.world[i].length; j++) {
-                switch (this.world[i][j]) {
-                    case 1:
-                        this.entitys.push(new WallEntity(scene, 1, j * height + sheight - WIDTH / 2, i * height + sheight - HEIGHT / 2, height - sheight));
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        this.entitys.push(new SpawnerTest(scene, 2, j * height + sheight - WIDTH / 2, i * height + sheight - HEIGHT / 2, height - sheight))
+                if (typeof this.world[i][j] === 'object') {
+                    let obj = Object.create (this.world[i][j].classe.prototype);
+                    obj = new obj.constructor (scene, this.world[i][j].id, j * height + sheight - World.WIDTH / 2, 
+                                                        i * height + sheight - World.HEIGHT / 2, height - sheight);
+                    
+                    if (this.world[i][j].classe.prototype instanceof Entity) {
+                        this.entitys.push (obj)
+                    }
                 }
             }
         }
 
         // Our built-in 'ground' shape.
         var ground = BABYLON.MeshBuilder.CreateGround("ground", {
-            width: WIDTH,
-            height: HEIGHT
+            width: World.WIDTH,
+            height: World.HEIGHT
         }, scene);
 
         return scene;
@@ -83,7 +84,7 @@ export default class World {
         for (let i = this.entitys.length - 1; i >= 0; i--) {
             if (this.entitys[i].lifePoints <= 0) {
                 this.scene.removeMesh(this.entitys[i].shape);
-                this.bullets.splice(i, 1);
+                this.entitys.splice(i, 1);
             } else {
                 this.entitys[i].move(this.entitys);
                 this.entitys[i].shoot(this);
@@ -102,3 +103,5 @@ export default class World {
         })
     }
 }
+
+export { World }

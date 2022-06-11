@@ -1,6 +1,6 @@
-import Entity from "../Entity.js";
+import {Entity} from "../Entity.js";
 
-export default class Spawner extends Entity {
+class Spawner extends Entity {
 
     constructor (scene, id, coordX, coordY, height, vx, vy) {
         super (scene, id, coordX, coordY, height, vx, vy);
@@ -41,4 +41,8 @@ export default class Spawner extends Entity {
     touch () {
         this.lifePoints -= 1;
     }
+}
+
+export {
+    Spawner
 }

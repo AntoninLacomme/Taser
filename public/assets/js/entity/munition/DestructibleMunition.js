@@ -1,6 +1,6 @@
-import Munition from "./Munition.js";
+import {Munition} from "./Munition.js";
 
-export default class DestructibleMunition extends Munition {
+class DestructibleMunition extends Munition {
 
     constructor(scene, id, coordX, coordY, height, vx, vy) {
         super(scene, id, coordX, coordY, height, vx, vy);
@@ -26,3 +26,5 @@ export default class DestructibleMunition extends Munition {
         return super.move(listEntitys);
     }
 }
+
+export { DestructibleMunition }
