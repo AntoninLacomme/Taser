@@ -1,0 +1,8 @@
+html, body {
+    margin: 0px;
+}
+#canvas-taser {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
