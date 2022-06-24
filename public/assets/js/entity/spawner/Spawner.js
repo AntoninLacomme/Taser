@@ -1,24 +1,28 @@
-import {Entity} from "../Entity.js";
+import {
+    Entity
+} from "../Entity.js";
 
 class Spawner extends Entity {
 
-    constructor (scene, id, coordX, coordY, height, vx, vy) {
-        super (scene, id, coordX, coordY, height, vx, vy);
+    constructor(scene, id, coordX, coordY, height, vx, vy) {
+        super(scene, id, coordX, coordY, height, vx, vy);
 
         this.nbFrameBeforeShoot = 15;
         this.currentFrameBeforeShoot = 0;
+
+        this.invulnerability = false;
 
         this.angleVisee = 0;
         this.speedMunition = 2;
     }
 
-    move () {
+    move() {
         super.move();
     }
 
-    shoot (world) {
+    shoot(world) {
         if (this.currentFrameBeforeShoot == 0) {
-            this.summonMunition (world);
+            this.summonMunition(world);
         }
 
         this.currentFrameBeforeShoot++;
@@ -28,18 +32,20 @@ class Spawner extends Entity {
         }
     }
 
-    summonMunition (world) {
+    summonMunition(world) {
         // to override
     }
 
-    createMunitionWithAngle (scene, classe, angle) {
-        let obj = Object.create (classe.prototype);
-        obj = new obj.constructor (scene, this.id, this.coordX, this.coordY, 5, Math.cos(angle)*this.speedMunition, Math.sin (angle)*this.speedMunition);
+    createMunitionWithAngle(scene, classe, angle) {
+        let obj = Object.create(classe.prototype);
+        obj = new obj.constructor(scene, this.id, this.coordX, this.coordY, 5, Math.cos(angle) * this.speedMunition, Math.sin(angle) * this.speedMunition);
         return obj;
     }
 
-    touch () {
-        this.lifePoints -= 1;
+    touch() {
+        if (!this.invulnerability) {
+            this.lifePoints -= 1;
+        }
     }
 }
 

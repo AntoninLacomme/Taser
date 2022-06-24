@@ -1,6 +1,7 @@
 import { World } from './world/World.js';
 import { BlackWallEntity, WallEntity } from './entity/WallEntity.js';
 import { SpawnerTest } from './entity/spawner/SpawnerTest.js';
+import { PlayerEntity } from "./entity/spawner/Player.js"
 
 window.onload = () => {
     var canvas = document.querySelector("#canvas-taser");
@@ -15,17 +16,18 @@ window.onload = () => {
     });
 
     let WORLD = [];
-    for (let i=0; i<20; i++) {
+    let range = 21;
+    for (let i=0; i<range; i++) {
         let line = [];
-        for (let j=0; j<20; j++) {
+        for (let j=0; j<range; j++) {
             line.push (0);
 
-            // if ((i == 0 || j == 0) || (i == 19 || j == 19)) {
-            //     line[j] = {
-            //         classe: WallEntity,
-            //         id: 1
-            //     };
-            // }
+            if ((i == 0 || j == 0) || (i == (range-1) || j == (range-1))) {
+                line[j] = {
+                    classe: WallEntity,
+                    id: 1
+                };
+            }
         }
         WORLD.push (line);
     }
@@ -41,6 +43,11 @@ window.onload = () => {
     WORLD[15][15] = {
         classe: BlackWallEntity,
         id: 1
+    }
+
+    WORLD[5][10] = {
+        classe: PlayerEntity,
+        id: 3
     }
 
     let world = new World (engine, WORLD);

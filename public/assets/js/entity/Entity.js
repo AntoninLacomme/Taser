@@ -18,8 +18,7 @@ class Entity {
         this.vx = vx;
         this.vy = vy;
 
-        this.shape = this.render (scene);
-        this.shape.position.y = height;
+        this.shape = null;
 
         this.physic = true;
         this.collision = 'circle' || 'rect'
@@ -47,7 +46,7 @@ class Entity {
     }
 
     render () {
-        return null;
+        // to override
     }
 
     touch () {

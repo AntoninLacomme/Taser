@@ -10,6 +10,9 @@ class SpawnerTest extends Spawner {
         this.lifePoints = 5;
         this.alternate = true;
         this.speed = 0.5;
+
+        this.shape = this.render (scene);
+        this.shape.position.y = this.height;
     }
 
     render (scene) {

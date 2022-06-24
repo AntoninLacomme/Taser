@@ -6,6 +6,9 @@ class Munition extends Entity {
         super(scene, id, coordX, coordY, height, vx, vy);
 
         this.physic = false;
+
+        this.shape = this.render (scene);
+        this.shape.position.y = this.height;
     }
 
     render(scene) {

@@ -7,6 +7,9 @@ class WallEntity extends Entity {
 
         this.collision = 'rect';
         this.cheight = height * 0.8;
+
+        this.shape = this.render (scene);
+        this.shape.position.y = this.height;
     }
 
     render (scene) {
@@ -33,6 +36,9 @@ class BlackWallEntity extends WallEntity {
         super (scene, id, coordX, coordY, height);
 
         this.lifePoints = 5;
+
+        this.shape = this.render (scene);
+        this.shape.position.y = this.height;
     }
 
     render (scene) {
